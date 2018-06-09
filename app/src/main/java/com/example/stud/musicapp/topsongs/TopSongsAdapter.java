@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stud.musicapp.R;
@@ -31,7 +32,12 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
 
     @Override
     public void onBindViewHolder(TopSongsViewHolder holder, int position) {
+     TrendingSingle single=singles.get(position);
 
+     holder.tvPlace.setText(String.valueOf(single.intChartPlace));
+     holder.tvTrack.setText(single.strTrack);
+     holder.tvArtist.setText(single.strArtist);
+     holder.tvAlbum.setText(single.strAlbum);
     }
 
     @Override
@@ -41,7 +47,7 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
 
     public class TopSongsViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayaout llContainer;
+        LinearLayout llContainer;
         TextView tvPlace;
         TextView tvTrack;
         TextView tvArtist;
