@@ -1,5 +1,7 @@
 package com.example.stud.musicapp.topsongs;
 
+
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,32 +14,44 @@ import com.example.stud.musicapp.api.TrendingSingle;
 
 import java.util.List;
 
-
 public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSongsViewHolder>{
 
     List<TrendingSingle> singles;
-    public TopSongsAdapter(List<TrendingSingle>singles){
+
+    public TopSongsAdapter(List<TrendingSingle> singles) {
         this.singles = singles;
 
-    }
 
+    }
 
     @Override
     public TopSongsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater. from (parent.getContext());
-        View view = layoutInflater.inflate(R.layout. item_top_songs, parent, false );
+        View view = layoutInflater.inflate(R.layout.item_top_songs, parent, false );
 
         return new TopSongsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(TopSongsViewHolder holder, int position) {
-     TrendingSingle single=singles.get(position);
+        final TrendingSingle single = singles.get(position);
 
-     holder.tvPlace.setText(String.valueOf(single.intChartPlace));
-     holder.tvTrack.setText(single.strTrack);
-     holder.tvArtist.setText(single.strArtist);
-     holder.tvAlbum.setText(single.strAlbum);
+        holder.tvPlace.setText(String.valueOf(single.intChartPlace));
+        holder.tvTrack.setText(single.strTrack);
+        holder.tvArtist.setText(single.strArtist);
+        holder.tvAlbum.setText(single.strAlbum);
+
+        holder.llContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), SongDetailsActivity.class);
+                intent.putExtra(SongDetailsActivity.TRACK, single.strTrack);
+                intent.putExtra(SongDetailsActivity.ARTIST, single.strArtist);
+                intent.putExtra(SongDetailsActivity.TRACK_ID, single.idTrack);
+                view.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -45,9 +59,9 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         return singles == null ? 0 : singles.size();
     }
 
-    public class TopSongsViewHolder extends RecyclerView.ViewHolder {
+    public class TopSongsViewHolder extends RecyclerView.ViewHolder{
 
-        LinearLayout llContainer;
+        LinearLayout llContainer ;
         TextView tvPlace;
         TextView tvTrack;
         TextView tvArtist;
@@ -61,7 +75,7 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
             tvTrack = itemView.findViewById(R.id.tvTrack);
             tvArtist = itemView.findViewById(R.id.tvArtist);
             tvAlbum = itemView.findViewById(R.id.tvAlbum);
+
         }
     }
-
 }

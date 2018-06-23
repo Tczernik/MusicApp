@@ -11,19 +11,24 @@ import com.example.stud.musicapp.topsongs.TopSongsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Button bTopSongs = findViewById(R.id.bTopSongs);
         bTopSongs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,
-                        TopSongsActivity.class);
+                Intent intent = new Intent(MainActivity.this, TopSongsActivity.class);
                 startActivity(intent);
+
+
             }
+
         });
     }
 }
+
